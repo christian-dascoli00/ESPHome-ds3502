@@ -4,7 +4,7 @@ ESPHome integration to control one or more DS3502 I2C digital potentiometers.
 
 This component exposes each DS3502 as an [Output](https://esphome.io/components/output/) component, so its wiper position can be driven by any ESPHome entity (a `number`, etc). A dedicated `button` is also provided to permanently save the current wiper position to the chip's non-volatile memory.
 
-The idea for this component comes from [TheStigh/ds3502](https://github.com/TheStigh/ds3502), with the addition of the `restore_value` option to choose whether the wiper position should be saved to and restored from the chip's EEPROM by default, and address selection via the A0/A1 pins.
+The idea for this component comes from [TheStigh/ds3502](https://github.com/TheStigh/ds3502), with the addition of the `restore_value` option to choose whether the wiper position should be saved to the DS3502 chip's EEPROM by default, and address selection via the A0/A1 pins.
 
 To use this integration, add the configuration below to your ESPHome YAML file.
 
@@ -48,7 +48,7 @@ See [`ds3502.yaml`](./ds3502.yaml) for a complete configuration example with two
 - `a0` (Optional, boolean): State of the chip's A0 address pin. `false` if A0 is tied to GND, `true` if tied to VCC. Used together with `a1` to compute the I2C address (`0x28`-`0x2B`). Defaults to `false`.
 - `a1` (Optional, boolean): State of the chip's A1 address pin. `false` if A1 is tied to GND, `true` if tied to VCC. Defaults to `false`.
 - `address` (Optional, int): I2C `address` option. Defaults to `0x28`. If `a0`/`a1` are also set, they overwrite whatever `address` you specify. Use `address` on its own (without `a0`/`a1`) if you need to manually set an address.
-- `restore_value` (Optional, boolean): Whether to write the wiper position to the chip's non-volatile memory (EEPROM) every time it is set. Enable this option if you need the potentiometer to resume its last commanded position after a power cycle. Defaults to `false`. Note: EEPROM has a limited number of write cycles. Frequent writes wear it out.
+- `restore_value` (Optional, boolean): Whether to write the wiper position to the chip's non-volatile memory (EEPROM) every time it is set. Enable this option if you need the potentiometer to resume its last commanded position after a power cycle. This has nothing to do with the ESP32's flash: it only acts on the DS3502 chip's internal memory. Defaults to `false`. Note: EEPROM has a limited number of write cycles. Frequent writes wear it out.
 
 `a0` and `a1` must be specified together. When both are set, the address is computed as:
 
