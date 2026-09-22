@@ -4,7 +4,7 @@ esphome:
 external_components:
   - source:
       type: git
-      url: https://github.com/christian-dascoli00/ESPHome-ds3503.git
+      url: https://github.com/christian-dascoli00/ESPHome-ds3502
     components: [ds3502]
 
 ota:

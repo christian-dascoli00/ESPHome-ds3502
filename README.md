@@ -14,7 +14,7 @@ Choose your I2C GPIO pins and specify them under `i2c`, then declare one `ds3502
 external_components:
   - source:
       type: git
-      url: https://github.com/christian-dascoli00/ESPHome-ds3503
+      url: https://github.com/christian-dascoli00/ESPHome-ds3502
       ref: main
     components: [ds3502]
 
