@@ -1,9 +1,6 @@
 #pragma once
 #include "esphome/core/component.h"
-#include "esphome/core/helpers.h"
 #include "esphome/components/i2c/i2c.h"
-#include "esphome/components/output/float_output.h"
-#include "esphome/components/button/button.h"
 
 namespace esphome {
 namespace ds3502 {
@@ -32,16 +29,6 @@ class DS3502Component : public Component, public i2c::I2CDevice {
 
   bool restore_value_{false};
   std::string name_{};
-};
-
-class DS3502Output : public output::FloatOutput, public Parented<DS3502Component> {
- protected:
-  void write_state(float state) override;
-};
-
-class DS3502SaveButton : public button::Button, public Parented<DS3502Component> {
- protected:
-  void press_action() override { this->parent_->save_current_to_eeprom(); }
 };
 
 }  // namespace ds3502

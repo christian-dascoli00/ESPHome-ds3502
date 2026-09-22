@@ -3,7 +3,7 @@ import esphome.config_validation as cv
 from esphome.components import output
 from esphome.const import CONF_ID
 
-from . import DS3502Component, ds3502_ns
+from .. import DS3502Component, ds3502_ns
 
 DEPENDENCIES = ["ds3502"]
 

@@ -1,8 +1,5 @@
 #include "ds3502.h"
 #include "esphome/core/log.h"
-#include "esphome/core/hal.h"
-#include <cmath>
-#include <algorithm>
 
 namespace esphome {
 namespace ds3502 {
@@ -20,7 +17,7 @@ std::string DS3502Component::get_log_prefix() const {
 }
 
 void DS3502Component::write_mode_(bool persist) {
-  uint8_t cr = persist ? 0x00 : DS3502_MODE_BIT;    // 0x80 = SRAM/volatile mode, 0x00 = EEPROM/persistent mode
+  uint8_t cr = persist ? 0x00 : DS3502_MODE_BIT;    // 0x80 = SRAM / volatile mode, 0x00 = EEPROM / persistent mode
   this->write_byte(DS3502_REG_CR, cr);
 }
 
@@ -87,15 +84,6 @@ void DS3502Component::dump_config() {
   ESP_LOGCONFIG(TAG, "  Restore value: %s", YESNO(this->restore_value_));
 }
 
-void DS3502Output::write_state(float state) {
-  if (std::isnan(state))
-    state = 0.0f;
-
-  int wiper_value = static_cast<int>(std::round(state * 127.0f));
-  wiper_value = std::max(0, std::min(127, wiper_value));
-
-  this->parent_->set_wiper(wiper_value);
-}
 
 }  // namespace ds3502
 }  // namespace esphome
